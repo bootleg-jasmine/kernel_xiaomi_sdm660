@@ -34,7 +34,6 @@ ifeq ($(CONFIG_ICNSS), y)
 	CONFIG_HELIUMPLUS := y
 	CONFIG_64BIT_PADDR := y
 	CONFIG_FEATURE_TSO := y
-	CONFIG_FEATURE_TSO_DEBUG := y
 	ifeq ($(CONFIG_INET_LRO), y)
 		CONFIG_WLAN_LRO := y
 	else
@@ -75,6 +74,9 @@ ifeq ($(CONFIG_ARCH_QCS40X), y)
 	CONFIG_WLAN_SYNC_TSF_PLUS_NOIRQ := y
 	CONFIG_RX_PERFORMANCE := y
 	CONFIG_TGT_NUM_MSDU_DESC := 900
+	CONFIG_MULTI_IF_LOG := y
+	CONFIG_DFS_PRI_MULTIPLIER := y
+	CONFIG_DFS_OVERRIDE_RF_THRESHOLD := y
 endif
 
 #Flag to enable Legacy Fast Roaming2(LFR2)
@@ -301,7 +303,6 @@ CONFIG_DP_INTR_POLL_BASED := y
 CONFIG_TX_PER_PDEV_DESC_POOL := y
 CONFIG_DP_TRACE := y
 CONFIG_FEATURE_TSO := y
-CONFIG_TSO_DEBUG_LOG_ENABLE := y
 CONFIG_DP_LFR := y
 CONFIG_HTT_PADDR64 := y
 CONFIG_RX_OL := y
@@ -367,7 +368,6 @@ CONFIG_WLAN_LOG_FATAL := y
 CONFIG_WLAN_LOG_ERROR := y
 CONFIG_WLAN_LOG_WARN := y
 CONFIG_WLAN_LOG_INFO := y
-CONFIG_WLAN_LOG_DEBUG := y
 
 #Enable OL debug and wmi unified functions
 CONFIG_ATH_PERF_PWR_OFFLOAD := y
@@ -549,14 +549,8 @@ CONFIG_FEATURE_HTC_CREDIT_HISTORY := y
 #Flag to enable MTRACE feature
 CONFIG_TRACE_RECORD_FEATURE := y
 
-#Flag to enable p2p debug feature
-CONFIG_WLAN_FEATURE_P2P_DEBUG := y
-
 #Flag to enable DFS Master feature
 CONFIG_WLAN_DFS_MASTER_ENABLE := y
-
-#Flag to enable/disable MTRACE feature
-CONFIG_ENABLE_MTRACE_LOG := y
 
 #Flag to enable nud tracking feature
 CONFIG_WLAN_NUD_TRACKING := y
@@ -566,6 +560,9 @@ CONFIG_WLAN_WBUFF := y
 
 #Flag to enable set and get disable channel list feature
 CONFIG_DISABLE_CHANNEL_LIST :=y
+
+#Flag to enable beacon receive feature
+CONFIG_WLAN_BCN_RECV_FEATURE := y
 
 CONFIG_WIFI_POS_CONVERGED := y
 ifneq ($(CONFIG_WIFI_POS_CONVERGED), y)
@@ -577,9 +574,6 @@ CONFIG_CP_STATS := y
 CONFIG_FEATURE_WLAN_WAPI := y
 
 CONFIG_AGEIE_ON_SCAN_RESULTS := y
-
-#Flag to enable FW log parsing support feature
-CONFIG_FEATURE_FW_LOG_PARSING := y
 
 CONFIG_PTT_SOCK_SVC_ENABLE := y
 CONFIG_SOFTAP_CHANNEL_RANGE := y
@@ -628,9 +622,6 @@ ifeq ($(CONFIG_LITHIUM), y)
 	CONFIG_FEATURE_UNIT_TEST_SUSPEND := y
 endif
 
-#Flag to enable hdd memory dump feature
-CONFIG_FEATURE_MEMDUMP_ENABLE := y
-
 #Flag to enable/disable WLAN D0-WOW
 ifeq ($(CONFIG_PCI_MSM), y)
 ifeq ($(CONFIG_HIF_PCI), y)
@@ -658,9 +649,9 @@ endif
 ifneq ($(TARGET_BUILD_VARIANT),user)
 CONFIG_DESC_DUP_DETECT_DEBUG := y
 CONFIG_DEBUG_RX_RING_BUFFER := y
+CONFIG_DP_TRACE := y
 endif
 
-CONFIG_DP_TRACE := y
 #Enable Beacon Reception Stats
 CONFIG_FEATURE_BECN_STATS := y
 
